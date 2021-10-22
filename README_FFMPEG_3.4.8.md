@@ -25,7 +25,7 @@ Building
 ```bash
 git clone -b ffmpeg-3.4.8 git@github.com:microsoft/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
-vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat]
+vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter]
 ```
 
 - `.so` libraries are built in `vcpkg/installed/x64-linux/lib`
