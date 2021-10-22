@@ -127,23 +127,13 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ffmpeg/ffmpeg
-    REF n4.4
-    SHA512 ae7426ca476df9fa9dba52cab06c38e484f835653fb2da57e7c06f5589d887c0854ee17df93a2f57191d498c1264cb1c69312cf0a8214b476800382e2d260c4b
+    REF n3.4.8
+    SHA512 34a9061b05ca2a156a58210b3e607a6cc88e17374cfc3932152aa7db7512c774d5287a27789b154c8598197856fc4ca5db2852aa140899df0cedc7618e7dff90
     HEAD_REF master
     PATCHES
         0001-create-lib-libraries.patch
         0003-fix-windowsinclude.patch
-        0004-fix-debug-build.patch
-        0006-fix-StaticFeatures.patch
         0007-fix-lib-naming.patch
-        0009-Fix-fdk-detection.patch
-        0010-Fix-x264-detection.patch
-        0011-Fix-x265-detection.patch
-        0012-Fix-ssl-110-detection.patch
-        0013-define-WINVER.patch
-        0014-avfilter-dependency-fix.patch  # http://ffmpeg.org/pipermail/ffmpeg-devel/2021-February/275819.html
-        0015-Fix-xml2-detection.patch
-        0016-configure-dnn-needs-avformat.patch  # http://ffmpeg.org/pipermail/ffmpeg-devel/2021-May/279926.html
         ${PATCHES}
 )
 
@@ -359,12 +349,6 @@ else()
     set(OPTIONS "${OPTIONS} --disable-bzlib")
 endif()
 
-if("dav1d" IN_LIST FEATURES)
-    set(OPTIONS "${OPTIONS} --enable-libdav1d")
-else()
-    set(OPTIONS "${OPTIONS} --disable-libdav1d")
-endif()
-
 if("fdk-aac" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libfdk-aac")
 else()
@@ -417,13 +401,6 @@ if("modplug" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libmodplug")
 else()
     set(OPTIONS "${OPTIONS} --disable-libmodplug")
-endif()
-
-if("nvcodec" IN_LIST FEATURES)
-    #Note: the --enable-cuda option does not actually require the cuda sdk or toolset port dependency as ffmpeg uses runtime detection and dynamic loading
-    set(OPTIONS "${OPTIONS} --enable-cuda --enable-nvenc --enable-nvdec --enable-cuvid --enable-ffnvcodec")
-else()
-    set(OPTIONS "${OPTIONS} --disable-cuda --disable-nvenc --disable-nvdec  --disable-cuvid --disable-ffnvcodec")
 endif()
 
 if("opencl" IN_LIST FEATURES)
@@ -490,12 +467,6 @@ if("ssh" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libssh")
 else()
     set(OPTIONS "${OPTIONS} --disable-libssh")
-endif()
-
-if("tensorflow" IN_LIST FEATURES)
-    set(OPTIONS "${OPTIONS} --enable-libtensorflow")
-else()
-    set(OPTIONS "${OPTIONS} --disable-libtensorflow")
 endif()
 
 if("tesseract" IN_LIST FEATURES)
@@ -604,7 +575,6 @@ if(VCPKG_TARGET_IS_UWP)
     set(OPTIONS_CROSS " --enable-cross-compile --target-os=win32 --arch=${VCPKG_TARGET_ARCHITECTURE}")
 endif()
 
-set(OPTIONS_DEBUG "--debug") # Note: --disable-optimizations can't be used due to http://ffmpeg.org/pipermail/libav-user/2013-March/003945.html
 set(OPTIONS_RELEASE "")
 
 set(OPTIONS "${OPTIONS} ${OPTIONS_CROSS}")
@@ -635,6 +605,7 @@ endif()
 
 set(ENV_LIB_PATH "$ENV{${LIB_PATH_VAR}}")
 
+set(OPTIONS "${OPTIONS} --enable-vaapi --enable-hwaccel=h264_vaapi")
 message(STATUS "Building Options: ${OPTIONS}")
 
 # Release build
