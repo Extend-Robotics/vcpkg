@@ -568,6 +568,47 @@ endif()
 
 set(OPTIONS_CROSS "")
 
+if(VCPKG_TARGET_IS_ANDROID)
+    set(OPTIONS "${OPTIONS} --disable-libxcb --enable-asm --disable-libxcb-shm --disable-libxcb-xfixes --disable-libxcb-shape --disable-alsa --enable-neon --disable-hwaccels --disable-postproc")
+
+    # Avoid 'Android x86: "error: inline assembly requires more registers than available"'
+    # See http://ffmpeg.org/pipermail/ffmpeg-trac/2019-March/048140.html
+#    string(REPLACE "--enable-asm" "" OPTIONS ${OPTIONS})
+    string(REPLACE "--enable-x86asm" "" OPTIONS ${OPTIONS})
+
+    set(ANDROID_CPU "")
+
+    if(VCPKG_TARGET_ARCHITECTURE STREQUAL "arm")
+        set(ANDROID_CPU "armv7-a")
+    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
+        set(ANDROID_CPU "armv8-a")
+    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86")
+        set(ANDROID_CPU "x86")
+    elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "x64")
+        set(ANDROID_CPU "x86-64")
+    endif()
+
+    set(ANDROID_API 21) # default ANDROID_API 21
+    if($ENV{ANDROID_API})
+        set(ANDROID_API $ENV{ANDROID_API})
+    endif()
+
+    if($ENV{ANDROID_PLATFORM})
+        set(ANDROID_PLATFORM $ENV{ANDROID_PLATFORM})
+    else()
+        set(ANDROID_PLATFORM ${ANDROID_API})
+    endif()
+
+    set(VCPKG_TARGET_TRIPLET ${TARGET_TRIPLET})
+    if(NOT VCPKG_CHAINLOAD_TOOLCHAIN_FILE)
+        set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${SCRIPTS}/toolchains/android.cmake")
+    endif()
+    include("${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
+
+    set(ANDROID_CLFLAGS "\'-fpic --target=${CMAKE_CXX_COMPILER_TARGET}\'")
+    set(OPTIONS_CROSS " --enable-cross-compile --cross-prefix=${ANDROID_TOOLCHAIN_PREFIX} --arch=${VCPKG_TARGET_ARCHITECTURE} --cpu=${ANDROID_CPU} --sysroot=${CMAKE_SYSROOT} --cc=${ANDROID_C_COMPILER} --cxx=${ANDROID_CXX_COMPILER} --target-os=android --extra-cflags=${ANDROID_CLFLAGS} --extra-ldflags=${ANDROID_CLFLAGS}")
+endif()
+
 if (VCPKG_TARGET_ARCHITECTURE STREQUAL "arm" OR VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
     if(VCPKG_TARGET_IS_WINDOWS)
         set(OPTIONS_CROSS " --enable-cross-compile --target-os=win32 --arch=${VCPKG_TARGET_ARCHITECTURE}")
