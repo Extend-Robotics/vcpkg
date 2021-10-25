@@ -23,7 +23,7 @@ sudo apt-get install libva-dev
 Building
 
 ```bash
-git clone -b ffmpeg-3.4.8 git@github.com:microsoft/vcpkg.git
+git clone -b ffmpeg-3.4.8 git@github.com:Extend-Robotics/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
 vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter]
 ```
