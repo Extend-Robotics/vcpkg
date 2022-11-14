@@ -4,26 +4,26 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ffmpeg/ffmpeg
-    REF n4.4.1
-    SHA512 a53e617937f9892c5cfddb00896be9ad8a3e398dc7cf3b6c893b52ff38aff6ff0cbc61a44cd5f93d9a28f775e71ae82996a5e2b699a769c1de8f882aab34c797
+    REF n4.2.7
+    SHA512 3dd35f1e0fc85f22becd031a7b4959c8ef7451919a75c9572dd22c3de06886bb78578969d9030392d9351f662e4c3fcb74aa75c8cc4acf60e3cb2f6174fa22f5
     HEAD_REF master
     PATCHES
         0001-create-lib-libraries.patch
         0003-fix-windowsinclude.patch
         0004-fix-debug-build.patch
-        0006-fix-StaticFeatures.patch
+#        0006-fix-StaticFeatures.patch
         0007-fix-lib-naming.patch
         0009-Fix-fdk-detection.patch
         0010-Fix-x264-detection.patch
-        0011-Fix-x265-detection.patch
-        0012-Fix-ssl-110-detection.patch
-        0013-define-WINVER.patch
-        0014-avfilter-dependency-fix.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-February/275819.html
+#        0011-Fix-x265-detection.patch
+#        0012-Fix-ssl-110-detection.patch
+#        0013-define-WINVER.patch
+#        0014-avfilter-dependency-fix.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-February/275819.html
         0015-Fix-xml2-detection.patch
-        0016-configure-dnn-needs-avformat.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-May/279926.html
+#        0016-configure-dnn-needs-avformat.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-May/279926.html
         ${PATCHES}
         0018-libaom-Dont-use-aom_codec_av1_dx_algo.patch
-        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
+#        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
         0020-fix-aarch64-libswscale.patch
         0021-fix-sdl2-version-check.patch
 )
@@ -509,6 +509,7 @@ if(CC_path)
     vcpkg_add_to_path(PREPEND "${CC_path}")
 endif()
 
+set(OPTIONS "${OPTIONS} --enable-vaapi --enable-hwaccel=h264_vaapi")
 message(STATUS "Building Options: ${OPTIONS}")
 
 # Release build
