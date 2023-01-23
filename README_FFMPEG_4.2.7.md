@@ -25,7 +25,7 @@ Building
 ```bash
 git clone -b ffmpeg-4.2.7 git@github.com:Extend-Robotics/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
-vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter]
+vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter,nvcodec]
 ```
 
 - `.so` libraries are built in `vcpkg/installed/x64-linux/lib`
