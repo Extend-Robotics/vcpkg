@@ -127,8 +127,8 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ffmpeg/ffmpeg
-    REF n3.4.8
-    SHA512 34a9061b05ca2a156a58210b3e607a6cc88e17374cfc3932152aa7db7512c774d5287a27789b154c8598197856fc4ca5db2852aa140899df0cedc7618e7dff90
+    REF n3.4.11
+    SHA512 3ad893de708be3d4e62d3375b688984af73e70440eb16aa2502974a49dfe0bb3560978602b6a821acce8a712bb37e5918caca1ab5f8c4553016a7bda8f39ff95
     HEAD_REF master
     PATCHES
         0001-create-lib-libraries.patch
@@ -353,6 +353,13 @@ if("fdk-aac" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-libfdk-aac")
 else()
     set(OPTIONS "${OPTIONS} --disable-libfdk-aac")
+endif()
+
+if("nvcodec" IN_LIST FEATURES)
+    #Note: the --enable-cuda option does not actually require the cuda sdk or toolset port dependency as ffmpeg uses runtime detection and dynamic loading
+    set(OPTIONS "${OPTIONS} --enable-cuda --enable-nvenc --enable-cuvid")
+else()
+    set(OPTIONS "${OPTIONS} --disable-cuda --disable-nvenc --disable-cuvid")
 endif()
 
 if("fontconfig" IN_LIST FEATURES)

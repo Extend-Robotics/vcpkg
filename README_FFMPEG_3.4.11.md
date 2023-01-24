@@ -4,7 +4,7 @@ Instructions for building FFmpeg LGPL shared libraries.
 
 ## vcpkg
 
-- `vcpkg/ports/ffmpeg/portfile.cmake` was modified for 3.4.8 build
+- `vcpkg/ports/ffmpeg/portfile.cmake` was modified for 3.4.11 build, vaapi and nvcodec support
 - `vcpkg/triplets/x64-linux.cmake` was modified for shared libraries and rpath set to $ORIGIN
 
 ## Platforms
@@ -23,9 +23,9 @@ sudo apt-get install libva-dev
 Building
 
 ```bash
-git clone -b ffmpeg-3.4.8 git@github.com:Extend-Robotics/vcpkg.git
+git clone -b ffmpeg-3.4.11 git@github.com:Extend-Robotics/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
-vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter]
+vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter,nvcodec]
 ```
 
 - `.so` libraries are built in `vcpkg/installed/x64-linux/lib`
