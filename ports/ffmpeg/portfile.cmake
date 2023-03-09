@@ -26,6 +26,7 @@ vcpkg_from_github(
 #        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
         0020-fix-aarch64-libswscale.patch
         0021-fix-sdl2-version-check.patch
+        0099-add-nvmpi-nvutils.patch
 )
 
 if (SOURCE_PATH MATCHES " ")
@@ -509,7 +510,7 @@ if(CC_path)
     vcpkg_add_to_path(PREPEND "${CC_path}")
 endif()
 
-set(OPTIONS "${OPTIONS} --enable-vaapi --enable-hwaccel=h264_vaapi")
+set(OPTIONS "${OPTIONS} --enable-nvmpi")
 message(STATUS "Building Options: ${OPTIONS}")
 
 # Release build
