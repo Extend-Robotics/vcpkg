@@ -39,7 +39,7 @@ git clone https://github.com/Extend-Robotics/jetson-ffmpeg.git
 cd jetson-ffmpeg
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 sudo make install
 sudo ldconfig
