@@ -47,7 +47,7 @@ sudo ldconfig
 ```
 
 ```bash
-sudo apt install ninja-build
+sudo apt install ninja-build nasm
 ```
 
 ## Building
