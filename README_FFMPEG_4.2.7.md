@@ -23,7 +23,7 @@ vcpkg for arm64 needs newer CMake
 wget https://github.com/Kitware/CMake/releases/download/v3.25.2/cmake-3.25.2.tar.gz
 
 tar -xvf cmake-3.25.2.tar.gz
-cd cmake-25.2
+cd cmake-3.25.2
 ./bootstrap
 make -j8
 
