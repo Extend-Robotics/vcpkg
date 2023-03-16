@@ -47,7 +47,7 @@ sudo ldconfig
 ```
 
 ```bash
-sudo apt install ninja
+sudo apt install ninja-build
 ```
 
 ## Building
