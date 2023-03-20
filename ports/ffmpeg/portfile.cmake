@@ -26,7 +26,7 @@ vcpkg_from_github(
 #        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
         0020-fix-aarch64-libswscale.patch
         0021-fix-sdl2-version-check.patch
-        0099-add-nvmpi-nvutils.patch
+        0099-POC-for-new-FFmpeg-nvmpi-API-implementation.patch
 )
 
 if (SOURCE_PATH MATCHES " ")
