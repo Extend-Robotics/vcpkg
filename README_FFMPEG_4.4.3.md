@@ -39,7 +39,7 @@ Tested on Jetson AGX Orin
 
 
 ```bash
-git clone -b ffmpeg-4.4.3-jetson-nvmpi git@github.com:Extend-Robotics/vcpkg.git
+git clone -b ffmpeg-4.4.3-jetson-nvmpi https://github.com/Extend-Robotics/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
 
 # required for VCPKG build on arm Jetson
