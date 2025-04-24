@@ -25,6 +25,7 @@ vcpkg_from_github(
         0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
         0020-fix-aarch64-libswscale.patch
         0022-fix-m1-hardware-decode-nal-bits.patch # remove in next version
+        0099-ffmpeg4.4_nvmpi.patch
 )
 
 if (SOURCE_PATH MATCHES " ")
@@ -508,6 +509,7 @@ if(CC_path)
     vcpkg_add_to_path(PREPEND "${CC_path}")
 endif()
 
+set(OPTIONS "${OPTIONS} --enable-nvmpi")
 message(STATUS "Building Options: ${OPTIONS}")
 
 # Release build
