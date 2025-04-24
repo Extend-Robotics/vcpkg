@@ -11,20 +11,20 @@ vcpkg_from_github(
         0001-create-lib-libraries.patch
         0003-fix-windowsinclude.patch
         0004-fix-debug-build.patch
-        0006-fix-StaticFeatures.patch
+#        0006-fix-StaticFeatures.patch
         0007-fix-lib-naming.patch
         0009-Fix-fdk-detection.patch
         0010-Fix-x264-detection.patch
-        0011-Fix-x265-detection.patch
-        0012-Fix-ssl-110-detection.patch
-        0013-define-WINVER.patch
-        0014-avfilter-dependency-fix.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-February/275819.html
+#        0011-Fix-x265-detection.patch
+#        0012-Fix-ssl-110-detection.patch
+#        0013-define-WINVER.patch
+#        0014-avfilter-dependency-fix.patch  # https://ffmpeg.org/pipermail/ffmpeg-devel/2021-February/275819.html
         0015-Fix-xml2-detection.patch
         ${PATCHES}
         0018-libaom-Dont-use-aom_codec_av1_dx_algo.patch
-        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
+#        0019-libx264-Do-not-explicitly-set-X264_API_IMPORTS.patch
         0020-fix-aarch64-libswscale.patch
-        0022-fix-m1-hardware-decode-nal-bits.patch # remove in next version
+#        0022-fix-m1-hardware-decode-nal-bits.patch # remove in next version
         0099-ffmpeg4.4_nvmpi.patch
 )
 
