@@ -24,13 +24,15 @@ cd jetson-ffmpeg-keylost
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
+# or if building within docker container
+# cmake -DWITH_STUBS=ON -DCMAKE_BUILD_TYPE=Release ..
 make
 sudo make install
 sudo ldconfig
 ```
 
 ```bash
-sudo apt install ninja-build nasm
+sudo apt install ninja-build nasm curl zip unzip tar
 ```
 
 ## Building
