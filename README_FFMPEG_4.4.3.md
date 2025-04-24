@@ -20,7 +20,7 @@ Tested on Jetson AGX Orin
 
 ```bash
 git clone https://github.com/Extend-Robotics/jetson-ffmpeg-keylost.git
-cd jetson-ffmpeg
+cd jetson-ffmpeg-keylost
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
