@@ -1,54 +1,35 @@
 # Notes
 
-Instructions for building FFmpeg LGPL shared libraries with `nvmpi` (newer NVUtils variant, not nvbuf_utils) support on Nvidia Jetson.
+Instructions for building FFmpeg LGPL shared libraries.
 
-See [jetson-ffmpeg](https://github.com/Extend-Robotics/jetson-ffmpeg-keylost) for more context.
 
 ## vcpkg
 
-- `vcpkg/ports/ffmpeg/portfile.cmake` was modified for 4.4.3 build with `nvmpi`
-- `vcpkg/triplets/community/arm64-linux.cmake` was modified for shared libraries and rpath set to $ORIGIN
+- `vcpkg/ports/ffmpeg/portfile.cmake` was modified for 4.4.3 build with VAAPI
+- `vcpkg/triplets/community/x64-linux.cmake` was modified for shared libraries and rpath set to $ORIGIN
 
 ## Platforms
 
-Testend with Jetson AGX Orin on Ubuntu 22.04
-
-## Dependencies
-
-Tested on Jetson AGX Orin
-
-
-```bash
-git clone https://github.com/Extend-Robotics/jetson-ffmpeg-keylost.git
-cd jetson-ffmpeg-keylost
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-# or if building within docker container
-# cmake -DWITH_STUBS=ON -DCMAKE_BUILD_TYPE=Release ..
-make
-sudo make install
-sudo ldconfig
-```
-
-```bash
-sudo apt install ninja-build nasm curl zip unzip tar
-```
+Testend on Ubuntu 22.04
 
 ## Building
 
-Tested on Jetson AGX Orin
-
+Dependencies
 
 ```bash
-git clone -b ffmpeg-4.4.3-jetson-nvmpi https://github.com/Extend-Robotics/vcpkg.git
-vcpkg/bootstrap-vcpkg.sh
-
-# required for VCPKG build on arm Jetson
-export VCPKG_FORCE_SYSTEM_BINARIES=1
-vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter]
+# for FFMpeg and building with VAAPI support
+sudo apt-get install yasm libva-dev
 ```
+
+```bash
+git clone -b ffmpeg-4.4.3 git@github.com:Extend-Robotics/vcpkg.git
+vcpkg/bootstrap-vcpkg.sh
+vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter,nvcodec]
+```
+
 
 - `.so` libraries are built in `vcpkg/installed/arm64-linux/lib`
 - `FindFFmpeg.cmake` is located in `vcpkg/installed/arm64-linux/share/ffmpeg`
 
+- `.so` libraries are built in `vcpkg/installed/x64-linux/lib`
+- `FindFFmpeg.cmake is located in vcpkg/installed/x64-linux/share/ffmpeg`
