@@ -18,18 +18,14 @@ Dependencies
 
 ```bash
 # for FFMpeg and building with VAAPI support
-sudo apt-get install yasm libva-dev
+sudo apt-get install nasm yasm libva-dev git curl zip build-essential pkg-config python3
 ```
 
 ```bash
-git clone -b ffmpeg-4.4.3 git@github.com:Extend-Robotics/vcpkg.git
+git clone -b ffmpeg-4.4.3 https://github.com/Extend-Robotics/vcpkg.git
 vcpkg/bootstrap-vcpkg.sh
 vcpkg/vcpkg install ffmpeg[core,avcodec,swscale,avformat,avfilter,nvcodec]
 ```
-
-
-- `.so` libraries are built in `vcpkg/installed/arm64-linux/lib`
-- `FindFFmpeg.cmake` is located in `vcpkg/installed/arm64-linux/share/ffmpeg`
 
 - `.so` libraries are built in `vcpkg/installed/x64-linux/lib`
 - `FindFFmpeg.cmake is located in vcpkg/installed/x64-linux/share/ffmpeg`
